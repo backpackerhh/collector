@@ -149,6 +149,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    yard (0.9.9)
 
 PLATFORMS
   ruby
@@ -165,6 +166,7 @@ DEPENDENCIES
   shoulda-matchers!
   web-console (>= 3.3.0)
   webpacker
+  yard
 
 RUBY VERSION
    ruby 2.4.1p111
