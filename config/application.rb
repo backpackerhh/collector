@@ -27,5 +27,11 @@ module Collector
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Generators
+    config.generators do |g|
+      g.assets false
+      g.helper false
+    end
   end
 end
