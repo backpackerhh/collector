@@ -32,6 +32,8 @@ module Collector
     config.generators do |g|
       g.assets false
       g.helper false
+      g.view_specs false
+      g.controller_specs false
     end
   end
 end

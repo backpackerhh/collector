@@ -9,6 +9,7 @@ I'd like to build the same app using another Ruby framework such as [Hanami](htt
 ## About this site
 
 * Powered by [Ruby on Rails 5.1](http://rubyonrails.org/)
+* Tested with [RSpec](http://rspec.info/)
 * Coded with [Sublime Text](https://www.sublimetext.com/)
 * Developed running [Ubuntu MATE 16.04.1 LTS](https://ubuntu-mate.org/)
 
