@@ -9,6 +9,7 @@ I'd like to build the same app using another Ruby framework such as [Hanami](htt
 ## About this site
 
 * Powered by [Ruby on Rails 5.1](http://rubyonrails.org/)
+* HTML markup via [Slim](http://slim-lang.com/)
 * Tested with [RSpec](http://rspec.info/) + [FactoryGirl](https://github.com/thoughtbot/factory_girl_rails) + [Shoulda Matchers](http://matchers.shoulda.io/)
 * Documented with [YARD](http://yardoc.org/)
 * Coded with [Sublime Text](https://www.sublimetext.com/)
