@@ -5,5 +5,6 @@ html
       | Collector
     = csrf_meta_tags
     /= stylesheet_link_tag 'application', media: 'all'
+    link href="/humans.txt" rel="author"
   body
     = yield
