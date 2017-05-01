@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/thoughtbot/shoulda-matchers.git
+  revision: ead87017a6c15adce66a87dce8ee2ece91d0d27c
+  branch: rails-5
+  specs:
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -151,6 +159,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.0)
   rspec-rails (~> 3.5)
+  shoulda-matchers!
   web-console (>= 3.3.0)
   webpacker
 
