@@ -7,4 +7,9 @@ html
     /= stylesheet_link_tag 'application', media: 'all'
     link href="/humans.txt" rel="author"
   body
+    h1 = link_to 'Collector', root_path
+
+    ul
+      li = link_to 'Distributors', distributors_path
+
     = yield
