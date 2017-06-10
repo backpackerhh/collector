@@ -1,0 +1,2 @@
+class DistributorsController < ApplicationController
+end
