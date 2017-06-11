@@ -1,0 +1,10 @@
+= form_with model: form.format, local: true do |f|
+  = render 'shared/error_messages', resource: form.format if form.errors.any?
+
+  div
+    = f.label :name
+    br
+    = f.text_field :name
+
+  div
+    = f.button :submit
