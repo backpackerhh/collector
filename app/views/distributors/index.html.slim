@@ -1,0 +1,14 @@
+h2 Distributors
+
+table
+  thead
+    tr
+      th Name
+      th
+  tbody
+    = render @dashboard.distributors
+
+h3 Options
+
+ul
+  li= link_to 'New Distributor', new_distributor_path
