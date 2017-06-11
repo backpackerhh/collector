@@ -1,0 +1,14 @@
+h2 Formats
+
+table
+  thead
+    tr
+      th Name
+      th
+  tbody
+    = render @dashboard.formats
+
+h3 Options
+
+ul
+  li= link_to 'New Format', new_format_path
