@@ -142,4 +142,26 @@ RSpec.describe 'Distributors', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:distributor) { create(:distributor) }
+
+    it 'redirects to distributors list' do
+      delete distributor_path(distributor)
+
+      expect(response).to redirect_to(distributors_path)
+    end
+
+    it 'deletes distributor' do
+      expect { delete distributor_path(distributor) }.to change { Distributor.count }.by -1
+    end
+
+    it 'displays flash message' do
+      delete distributor_path(distributor)
+
+      follow_redirect!
+
+      expect(response.body).to include('Distributor was successfully destroyed.')
+    end
+  end
 end

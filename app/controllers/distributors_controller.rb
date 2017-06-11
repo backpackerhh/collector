@@ -35,6 +35,13 @@ class DistributorsController < ApplicationController
     end
   end
 
+  def destroy
+    distributor = find_distributor
+    distributor.destroy
+
+    redirect_to distributors_path, notice: 'Distributor was successfully destroyed.'
+  end
+
   private
 
   def distributor_params

@@ -1,2 +1,3 @@
 tr
   td= link_to distributor.name, edit_distributor_path(distributor)
+  td= link_to 'Delete', distributor_path(distributor), method: :delete, data: { confirm: 'Are you sure?' }
