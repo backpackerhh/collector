@@ -142,4 +142,26 @@ RSpec.describe 'Formats', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:format) { create(:format) }
+
+    it 'redirects to formats list' do
+      delete format_path(format)
+
+      expect(response).to redirect_to(formats_path)
+    end
+
+    it 'deletes format' do
+      expect { delete format_path(format) }.to change { Format.count }.by -1
+    end
+
+    it 'displays flash message' do
+      delete format_path(format)
+
+      follow_redirect!
+
+      expect(response.body).to include('Format was successfully destroyed.')
+    end
+  end
 end

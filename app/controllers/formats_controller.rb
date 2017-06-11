@@ -35,6 +35,13 @@ class FormatsController < ApplicationController
     end
   end
 
+  def destroy
+    format = find_format
+    format.destroy
+
+    redirect_to formats_path, notice: 'Format was successfully destroyed.'
+  end
+
   private
 
   def format_params
