@@ -12,4 +12,8 @@ html
     ul
       li = link_to 'Distributors', distributors_path
 
+    - flash.each do |name, msg|
+      div class="#{name}"
+        p= msg
+
     = yield
