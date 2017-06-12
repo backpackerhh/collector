@@ -35,6 +35,13 @@ class PackagingsController < ApplicationController
     end
   end
 
+  def destroy
+    packaging = find_packaging
+    packaging.destroy
+
+    redirect_to packagings_path, notice: 'Packaging was successfully destroyed.'
+  end
+
   private
 
   def packaging_params

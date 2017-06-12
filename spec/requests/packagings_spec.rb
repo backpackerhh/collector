@@ -142,4 +142,26 @@ RSpec.describe 'Packagings', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:packaging) { create(:packaging) }
+
+    it 'redirects to packagings list' do
+      delete packaging_path(packaging)
+
+      expect(response).to redirect_to(packagings_path)
+    end
+
+    it 'deletes packaging' do
+      expect { delete packaging_path(packaging) }.to change { Packaging.count }.by -1
+    end
+
+    it 'displays flash message' do
+      delete packaging_path(packaging)
+
+      follow_redirect!
+
+      expect(response.body).to include('Packaging was successfully destroyed.')
+    end
+  end
 end
