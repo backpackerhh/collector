@@ -1,0 +1,14 @@
+h2 Packagings
+
+table
+  thead
+    tr
+      th Name
+      th
+  tbody
+    = render @dashboard.packagings
+
+h3 Options
+
+ul
+  li= link_to 'New Packaging', new_packaging_path
