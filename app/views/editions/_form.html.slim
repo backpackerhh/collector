@@ -1,0 +1,26 @@
+= form_with model: form.edition, local: true do |f|
+  = render 'shared/error_messages', resource: form.edition if form.errors.any?
+
+  div
+    = f.label :name
+    br
+    = f.text_field :name
+
+  div
+    = f.label :distributor_id
+    br
+    = f.select :distributor_id, options_from_collection_for_select(form.distributors, :id, :name, form.distributor_id),
+      include_blank: 'Select a distributor'
+
+  div
+    = f.label :release_date
+    br
+    = f.text_field :release_date
+
+  div
+    = f.label :country_code
+    br
+    = f.country_select :country_code, only: form.countries, include_blank: 'Select a country'
+
+  div
+    = f.button :submit

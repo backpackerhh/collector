@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.5'
 # Template engine
 gem 'slim-rails'
 
+# Forms
+gem 'country_select'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
