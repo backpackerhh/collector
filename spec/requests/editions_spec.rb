@@ -144,4 +144,26 @@ RSpec.describe 'Editions', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:edition) { create(:edition) }
+
+    it 'redirects to editions list' do
+      delete edition_path(edition)
+
+      expect(response).to redirect_to(editions_path)
+    end
+
+    it 'deletes edition' do
+      expect { delete edition_path(edition) }.to change { Edition.count }.by -1
+    end
+
+    it 'displays flash message' do
+      delete edition_path(edition)
+
+      follow_redirect!
+
+      expect(response.body).to include('Edition was successfully destroyed.')
+    end
+  end
 end

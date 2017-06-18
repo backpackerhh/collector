@@ -35,6 +35,13 @@ class EditionsController < ApplicationController
     end
   end
 
+  def destroy
+    edition = find_edition
+    edition.destroy
+
+    redirect_to editions_path, notice: 'Edition was successfully destroyed.'
+  end
+
   private
 
   def edition_params

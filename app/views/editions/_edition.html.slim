@@ -3,3 +3,4 @@ tr
   td= edition.distributor_name
   td= edition.country
   td= edition.release_date
+  td= link_to 'Delete', edition_path(edition), method: :delete, data: { confirm: 'Are you sure?' }
