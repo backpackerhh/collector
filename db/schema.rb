@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611212913) do
+ActiveRecord::Schema.define(version: 20170613004857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20170611212913) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "editions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "distributor_id"
+    t.date "release_date"
+    t.string "country_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["distributor_id"], name: "index_editions_on_distributor_id"
   end
 
   create_table "formats", force: :cascade do |t|
@@ -33,4 +43,5 @@ ActiveRecord::Schema.define(version: 20170611212913) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "editions", "distributors"
 end

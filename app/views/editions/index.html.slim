@@ -1,0 +1,17 @@
+h2 Editions
+
+table
+  thead
+    tr
+      th Name
+      th Distributor
+      th Country
+      th Release date
+      th
+  tbody
+    = render @dashboard.editions
+
+h3 Options
+
+ul
+  li= link_to 'New Edition', new_edition_path
