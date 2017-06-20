@@ -1,3 +1,4 @@
 tr
   td= link_to region.name, edit_region_path(region)
   td= region.format_name
+  td= link_to 'Delete', region_path(region), method: :delete, data: { confirm: 'Are you sure?' }

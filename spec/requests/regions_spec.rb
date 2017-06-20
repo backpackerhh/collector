@@ -144,4 +144,26 @@ RSpec.describe 'Regions', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:region) { create(:region) }
+
+    it 'redirects to regions list' do
+      delete region_path(region)
+
+      expect(response).to redirect_to(regions_path)
+    end
+
+    it 'deletes region' do
+      expect { delete region_path(region) }.to change { Region.count }.by -1
+    end
+
+    it 'displays flash message' do
+      delete region_path(region)
+
+      follow_redirect!
+
+      expect(response.body).to include('Region was successfully destroyed.')
+    end
+  end
 end

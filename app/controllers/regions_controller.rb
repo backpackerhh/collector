@@ -35,6 +35,13 @@ class RegionsController < ApplicationController
     end
   end
 
+  def destroy
+    region = find_region
+    region.destroy
+
+    redirect_to regions_path, notice: 'Region was successfully destroyed.'
+  end
+
   private
 
   def region_params
