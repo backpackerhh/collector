@@ -1,0 +1,16 @@
+= form_with model: form.region, local: true do |f|
+  = render 'shared/error_messages', resource: form.region if form.errors.any?
+
+  div
+    = f.label :name
+    br
+    = f.text_field :name
+
+  div
+    = f.label :format_id
+    br
+    = f.select :format_id, options_from_collection_for_select(form.formats, :id, :name, form.format_id),
+      include_blank: 'Select a format'
+
+  div
+    = f.button :submit
