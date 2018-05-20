@@ -10,7 +10,7 @@ I'd like to build the same app using another Ruby framework such as [Hanami](htt
 
 * Powered by [Ruby on Rails 5.1](http://rubyonrails.org/)
 * HTML markup via [Slim](http://slim-lang.com/)
-* Tested with [RSpec](http://rspec.info/) + [FactoryGirl](https://github.com/thoughtbot/factory_girl_rails) + [Shoulda Matchers](http://matchers.shoulda.io/)
+* Tested with [RSpec](http://rspec.info/) + [FactoryBot](https://github.com/thoughtbot/factory_bot_rails) + [Shoulda Matchers](http://matchers.shoulda.io/)
 * Documented with [YARD](http://yardoc.org/)
 * Coded with [Sublime Text](https://www.sublimetext.com/)
 * Developed running [Ubuntu MATE 16.04.1 LTS](https://ubuntu-mate.org/)
