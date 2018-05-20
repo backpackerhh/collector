@@ -2,12 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
-gem 'rails', '~> 5.1.0'
+gem 'rails', '5.2.0'
 
 # Database
 gem 'pg', '~> 0.18'
@@ -30,7 +25,7 @@ gem 'country_select'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -39,6 +34,6 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers'
   gem 'faker'
 end
