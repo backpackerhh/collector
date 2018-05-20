@@ -2,11 +2,6 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'rails', '5.2.0'
 
 # Database
@@ -39,6 +34,6 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers'
   gem 'faker'
 end
