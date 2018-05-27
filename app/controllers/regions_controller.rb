@@ -9,10 +9,10 @@ class RegionsController < ApplicationController
   end
 
   def create
-    region = Region.new(region_params)
+    region = Region.new
     @form = RegionForm.new(region)
 
-    if @form.submit(params[:region])
+    if @form.submit(region_params)
       redirect_to regions_path, notice: 'Region was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class RegionsController < ApplicationController
     region = find_region
     @form = RegionForm.new(region)
 
-    if @form.submit(params[:region])
+    if @form.submit(region_params)
       redirect_to regions_path, notice: 'Region was successfully updated.'
     else
       render :edit

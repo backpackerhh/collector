@@ -9,10 +9,10 @@ class EditionsController < ApplicationController
   end
 
   def create
-    edition = Edition.new(edition_params)
+    edition = Edition.new
     @form = EditionForm.new(edition)
 
-    if @form.submit(params[:edition])
+    if @form.submit(edition_params)
       redirect_to editions_path, notice: 'Edition was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class EditionsController < ApplicationController
     edition = find_edition
     @form = EditionForm.new(edition)
 
-    if @form.submit(params[:edition])
+    if @form.submit(edition_params)
       redirect_to editions_path, notice: 'Edition was successfully updated.'
     else
       render :edit

@@ -63,8 +63,8 @@ class DistributorForm
   #
   # Those fields that user filled, remain filled in case that any validation error is found.
   def preload_fields_with(params)
-    %i(name).each do |field|
-      self.public_send("#{field}=", params[field]) if params.has_key?(field)
+    params.to_h.each_key do |field|
+      self.public_send("#{field}=", params[field])
     end
   end
 
