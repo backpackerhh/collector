@@ -21,6 +21,7 @@ gem 'slim-rails'
 
 # Forms
 gem 'country_select'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platform: :mri
