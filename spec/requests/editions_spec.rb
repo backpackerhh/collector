@@ -30,6 +30,12 @@ RSpec.describe 'Editions', type: :request do
   end
 
   describe '#create' do
+    it 'instantiates form object' do
+      expect(EditionForm).to receive(:new).and_call_original
+
+      post editions_path, params: { edition: attributes_for(:edition) }
+    end
+
     context 'with valid params' do
       let(:distributor) { create(:distributor) }
 
@@ -37,20 +43,18 @@ RSpec.describe 'Editions', type: :request do
         { edition: attributes_for(:edition).merge(distributor_id: distributor.id) }
       end
 
-      it 'instantiates form object' do
-        expect(EditionForm).to receive(:new).and_call_original
-
-        post editions_path, params: valid_params
-      end
-
       it 'creates a new edition' do
-        expect { post editions_path, params: valid_params }.to change { Edition.count }.from(0).to 1
+        expect {
+          post editions_path, params: valid_params
+        }.to change {
+          Edition.count
+        }.from(0).to 1
       end
 
-      it 'redirects to editions list' do
+      it 'redirects to edition edit page' do
         post editions_path, params: valid_params
 
-        expect(response).to redirect_to(editions_path)
+        expect(response.location).to match(/editions\/\d+\/edit/)
       end
 
       it 'displays flash message' do
@@ -68,7 +72,11 @@ RSpec.describe 'Editions', type: :request do
       end
 
       it 'does not create a new edition' do
-        expect { post editions_path, params: invalid_params }.to_not change { Edition.count }
+        expect {
+          post editions_path, params: invalid_params
+        }.to_not change {
+          Edition.count
+        }
       end
 
       it 're-renders form' do
@@ -96,21 +104,40 @@ RSpec.describe 'Editions', type: :request do
   end
 
   describe '#update' do
-    let(:edition) { create(:edition, name: 'Paramount') }
+    let(:edition) { create(:edition, name: 'Back To The Future Trilogy') }
+    let(:dvd)     { create(:format, name: 'DVD') }
+
+    it 'instantiates form object' do
+      expect(EditionForm).to receive(:new).and_call_original
+
+      put edition_path(edition), params: { edition: attributes_for(:edition) }
+    end
 
     context 'with valid params' do
       let(:valid_params) do
-        { edition: { name: 'Universal' } }
+        {
+          edition: {
+            name: 'Back To The Future Trilogy CE',
+            formats_attributes: {
+              123456 => {
+                'format_id'       => dvd.id,
+                'number_of_discs' => 2,
+                '_destroy'        => false
+              }
+            }
+          }
+        }
       end
 
-      it 'instantiates form object' do
-        expect(EditionForm).to receive(:new).and_call_original
-
-        put edition_path(edition), params: valid_params
-      end
-
-      it 'updates edition' do
-        expect { put edition_path(edition), params: valid_params }.to change { edition.reload.name }
+      it 'updates edition and creates a new format for it' do
+        expect {
+          put edition_path(edition), params: valid_params
+        }.to change {
+          edition.reload
+          edition.name
+        }.from('Back To The Future Trilogy').to('Back To The Future Trilogy CE').and change {
+          edition.formats.count
+        }.from(0).to 1
       end
 
       it 'redirects to editions list' do
@@ -133,8 +160,13 @@ RSpec.describe 'Editions', type: :request do
         { edition: { name: '' } }
       end
 
-      it 'does not create a new edition' do
-        expect { put edition_path(edition), params: invalid_params }.to_not change { edition.reload.name }
+      it 'does not update edition' do
+        expect {
+          put edition_path(edition), params: invalid_params
+        }.to_not change {
+          edition.reload
+          edition.name
+        }
       end
 
       it 're-renders form' do
@@ -155,7 +187,11 @@ RSpec.describe 'Editions', type: :request do
     end
 
     it 'deletes edition' do
-      expect { delete edition_path(edition) }.to change { Edition.count }.by -1
+      expect {
+        delete edition_path(edition)
+      }.to change {
+        Edition.count
+      }.by -1
     end
 
     it 'displays flash message' do

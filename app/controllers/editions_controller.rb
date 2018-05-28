@@ -13,7 +13,7 @@ class EditionsController < ApplicationController
     @form = EditionForm.new(edition)
 
     if @form.submit(edition_params)
-      redirect_to editions_path, notice: 'Edition was successfully created.'
+      redirect_to edit_edition_path(edition), notice: 'Edition was successfully created.'
     else
       render :new
     end
@@ -45,7 +45,11 @@ class EditionsController < ApplicationController
   private
 
   def edition_params
-    params.require(:edition).permit(:name, :distributor_id, :country_code, :release_date)
+    params.require(:edition).permit(:name, :distributor_id, :country_code, :release_date, format_params)
+  end
+
+  def format_params
+    { formats_attributes: [:id, :format_id, :number_of_discs, :_destroy] }
   end
 
   def find_edition

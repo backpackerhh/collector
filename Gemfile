@@ -23,6 +23,9 @@ gem 'slim-rails'
 gem 'country_select'
 gem 'cocoon'
 
+# Parsers
+gem 'nokogiri'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'

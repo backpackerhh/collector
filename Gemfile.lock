@@ -189,6 +189,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   jbuilder (~> 2.5)
+  nokogiri
   pg (~> 0.18)
   puma (~> 3.7)
   rails (= 5.2.0)

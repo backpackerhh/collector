@@ -1,0 +1,13 @@
+.nested-fields
+  .field
+    = f.label :format_id
+    br
+    = f.select :format_id, options_from_collection_for_select(form.edition_formats, :id, :name, f.object.format_id),
+      include_blank: 'Select a format'
+
+  .field
+    = f.label :number_of_discs
+    br
+    = f.number_field :number_of_discs, min: 1
+
+    = link_to_remove_association 'Remove format', f

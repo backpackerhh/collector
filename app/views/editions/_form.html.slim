@@ -22,5 +22,7 @@
     br
     = f.country_select :country_code, only: form.countries, include_blank: 'Select a country'
 
+  = yield f
+
   div
     = f.button :submit
