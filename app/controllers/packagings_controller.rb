@@ -9,10 +9,10 @@ class PackagingsController < ApplicationController
   end
 
   def create
-    packaging = Packaging.new(packaging_params)
+    packaging = Packaging.new
     @form = PackagingForm.new(packaging)
 
-    if @form.submit(params[:packaging])
+    if @form.submit(packaging_params)
       redirect_to packagings_path, notice: 'Packaging was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class PackagingsController < ApplicationController
     packaging = find_packaging
     @form = PackagingForm.new(packaging)
 
-    if @form.submit(params[:packaging])
+    if @form.submit(packaging_params)
       redirect_to packagings_path, notice: 'Packaging was successfully updated.'
     else
       render :edit

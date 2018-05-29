@@ -3,6 +3,6 @@
 # The views are fed only with an instance of this class, using its public methods
 class EditionsDashboard
   def editions
-    Edition.order(:name).map { |e| EditionDecorator.new(e) }
+    Edition.order(:name)
   end
 end

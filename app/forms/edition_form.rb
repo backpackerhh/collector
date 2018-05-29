@@ -18,7 +18,7 @@ class EditionForm
   #
   # @return [Array] attributes of the model and name of its associations
   def self.edition_attributes
-    Edition.column_names + Edition.reflections.keys
+    Edition.column_names + Edition.reflections.keys + [:formats_attributes]
   end
 
   # Used to retrieve all kinds of naming-related information
@@ -58,11 +58,15 @@ class EditionForm
   end
 
   def distributors
-    Distributor.order(:name)
+    @distributors ||= Distributor.order(:name)
   end
 
   def countries
-    %w(ES GB US FR DE IT JP KR CA CN CZ)
+    %w(ES GB US FR DE IT JP KR CA CN CZ SE)
+  end
+
+  def edition_formats
+    @edition_formats ||= Format.order(:name)
   end
 
   private
@@ -71,7 +75,7 @@ class EditionForm
   #
   # Those fields that user filled, remain filled in case that any validation error is found.
   def preload_fields_with(params)
-    params.keys.each do |field|
+    params.to_h.each_key do |field|
       self.public_send("#{field}=", params[field])
     end
   end

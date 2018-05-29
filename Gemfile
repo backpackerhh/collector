@@ -21,6 +21,10 @@ gem 'slim-rails'
 
 # Forms
 gem 'country_select'
+gem 'cocoon'
+
+# Parsers
+gem 'nokogiri'
 
 group :development, :test do
   gem 'byebug', platform: :mri

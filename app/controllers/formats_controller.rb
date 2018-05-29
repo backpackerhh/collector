@@ -9,10 +9,10 @@ class FormatsController < ApplicationController
   end
 
   def create
-    format = Format.new(format_params)
+    format = Format.new
     @form = FormatForm.new(format)
 
-    if @form.submit(params[:format])
+    if @form.submit(format_params)
       redirect_to formats_path, notice: 'Format was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class FormatsController < ApplicationController
     format = find_format
     @form = FormatForm.new(format)
 
-    if @form.submit(params[:format])
+    if @form.submit(format_params)
       redirect_to formats_path, notice: 'Format was successfully updated.'
     else
       render :edit

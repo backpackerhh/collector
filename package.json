@@ -6,6 +6,8 @@
     "babel-core": "^6.24.1",
     "babel-loader": "7.x",
     "babel-preset-env": "^1.5.0",
+    "cocoon-js": "^0.0.5",
+    "cocoon-rails": "^1.2.6",
     "coffee-loader": "^0.7.3",
     "coffee-script": "^1.12.6",
     "compression-webpack-plugin": "^0.4.0",

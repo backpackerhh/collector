@@ -4,11 +4,9 @@ This app allows me to keep tracking of my collection of movies and TV shows.
 
 Looking at this project, I want you to focus on my way of working and thinking, rather than on its complexity. I'll try to show you how I organize my code and will document whatever decisions I make, either with commit messages and/or with inline comments.
 
-I'd like to build the same app using another Ruby framework such as [Hanami](http://hanamirb.org/), or another programming languages, such as [Elixir](http://elixir-lang.org/), [Go](https://golang.org/), [Python](https://www.python.org/) or [Crystal](https://crystal-lang.org/). *Just for fun*.
-
 ## About this site
 
-* Powered by [Ruby on Rails 5.1](http://rubyonrails.org/)
+* Powered by [Ruby on Rails 5](http://rubyonrails.org/)
 * HTML markup via [Slim](http://slim-lang.com/)
 * Tested with [RSpec](http://rspec.info/) + [FactoryBot](https://github.com/thoughtbot/factory_bot_rails) + [Shoulda Matchers](http://matchers.shoulda.io/)
 * Documented with [YARD](http://yardoc.org/)

@@ -67,7 +67,7 @@ class RegionForm
   #
   # Those fields that user filled, remain filled in case that any validation error is found.
   def preload_fields_with(params)
-    params.keys.each do |field|
+    params.to_h.each_key do |field|
       self.public_send("#{field}=", params[field])
     end
   end

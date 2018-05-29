@@ -9,10 +9,10 @@ class DistributorsController < ApplicationController
   end
 
   def create
-    distributor = Distributor.new(distributor_params)
+    distributor = Distributor.new
     @form = DistributorForm.new(distributor)
 
-    if @form.submit(params[:distributor])
+    if @form.submit(distributor_params)
       redirect_to distributors_path, notice: 'Distributor was successfully created.'
     else
       render :new
@@ -28,7 +28,7 @@ class DistributorsController < ApplicationController
     distributor = find_distributor
     @form = DistributorForm.new(distributor)
 
-    if @form.submit(params[:distributor])
+    if @form.submit(distributor_params)
       redirect_to distributors_path, notice: 'Distributor was successfully updated.'
     else
       render :edit

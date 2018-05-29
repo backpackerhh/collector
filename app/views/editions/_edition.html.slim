@@ -1,6 +1,8 @@
-tr
-  td= link_to edition.name, edit_edition_path(edition)
-  td= edition.distributor_name
-  td= edition.country
-  td= edition.release_date
-  td= link_to 'Delete', edition_path(edition), method: :delete, data: { confirm: 'Are you sure?' }
+- present(edition) do |edition_presenter|
+  tr
+    td= edition_presenter.name
+    td= edition.distributor_name
+    td= edition_presenter.country
+    td= edition.release_date
+    td= edition_presenter.formats
+    td= edition_presenter.destroy
