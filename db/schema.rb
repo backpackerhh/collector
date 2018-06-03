@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623213630) do
+ActiveRecord::Schema.define(version: 2018_06_03_114205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20170623213630) do
     t.bigint "format_id"
     t.index ["edition_id"], name: "index_edition_formats_on_edition_id"
     t.index ["format_id"], name: "index_edition_formats_on_format_id"
+  end
+
+  create_table "edition_packagings", force: :cascade do |t|
+    t.bigint "edition_id"
+    t.bigint "packaging_id"
+    t.index ["edition_id"], name: "index_edition_packagings_on_edition_id"
+    t.index ["packaging_id"], name: "index_edition_packagings_on_packaging_id"
   end
 
   create_table "editions", force: :cascade do |t|
@@ -61,6 +68,8 @@ ActiveRecord::Schema.define(version: 20170623213630) do
 
   add_foreign_key "edition_formats", "editions"
   add_foreign_key "edition_formats", "formats"
+  add_foreign_key "edition_packagings", "editions"
+  add_foreign_key "edition_packagings", "packagings"
   add_foreign_key "editions", "distributors"
   add_foreign_key "regions", "formats"
 end

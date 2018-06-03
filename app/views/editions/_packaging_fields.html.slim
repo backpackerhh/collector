@@ -1,0 +1,8 @@
+.nested-fields
+  .field
+    = f.label :packaging_id
+    br
+    = f.select :packaging_id, options_from_collection_for_select(form.edition_packagings, :id, :name, f.object.packaging_id),
+      include_blank: 'Select a packaging'
+
+    = link_to_remove_association 'Remove packaging', f

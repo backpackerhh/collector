@@ -18,7 +18,7 @@ class EditionForm
   #
   # @return [Array] attributes of the model and name of its associations
   def self.edition_attributes
-    Edition.column_names + Edition.reflections.keys + [:formats_attributes]
+    Edition.column_names + Edition.reflections.keys + [:formats_attributes, :packagings_attributes]
   end
 
   # Used to retrieve all kinds of naming-related information
@@ -67,6 +67,10 @@ class EditionForm
 
   def edition_formats
     @edition_formats ||= Format.order(:name)
+  end
+
+  def edition_packagings
+    @edition_packagings ||= Packaging.order(:name)
   end
 
   private
