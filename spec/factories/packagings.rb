@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :packaging do
-    name { Faker::Lorem.word.capitalize }
+    name { Faker::Lorem.unique.word.capitalize }
   end
 end

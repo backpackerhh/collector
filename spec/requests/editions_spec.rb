@@ -106,6 +106,7 @@ RSpec.describe 'Editions', type: :request do
   describe '#update' do
     let(:edition) { create(:edition, name: 'Back To The Future Trilogy') }
     let(:dvd)     { create(:format, name: 'DVD') }
+    let(:digipak) { create(:packaging, name: 'Digipak') }
 
     it 'instantiates form object' do
       expect(EditionForm).to receive(:new).and_call_original
@@ -124,6 +125,12 @@ RSpec.describe 'Editions', type: :request do
                 'number_of_discs' => 2,
                 '_destroy'        => false
               }
+            },
+            packagings_attributes: {
+              654321 => {
+                'packaging_id' => digipak.id,
+                '_destroy'     => false
+              }
             }
           }
         }
@@ -137,6 +144,8 @@ RSpec.describe 'Editions', type: :request do
           edition.name
         }.from('Back To The Future Trilogy').to('Back To The Future Trilogy CE').and change {
           edition.formats.count
+        }.from(0).to(1).and change {
+          edition.packagings.count
         }.from(0).to 1
       end
 

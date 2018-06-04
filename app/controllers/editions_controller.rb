@@ -45,11 +45,15 @@ class EditionsController < ApplicationController
   private
 
   def edition_params
-    params.require(:edition).permit(:name, :distributor_id, :country_code, :release_date, format_params)
+    params.require(:edition).permit(:name, :distributor_id, :country_code, :release_date, format_params, packaging_params)
   end
 
   def format_params
     { formats_attributes: [:id, :format_id, :number_of_discs, :_destroy] }
+  end
+
+  def packaging_params
+    { packagings_attributes: [:id, :packaging_id, :_destroy] }
   end
 
   def find_edition

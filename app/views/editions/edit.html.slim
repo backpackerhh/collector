@@ -1,13 +1,17 @@
 h2 Edit Edition
 
 == render 'form', form: @form do |f|
-  h3 Formats
-
   #formats
     = f.fields_for :formats do |format|
       = render 'format_fields', f: format, form: @form
     .links
       = link_to_add_association 'Add format', f, :formats, render_options: { locals: { form: @form } }
+
+  #packagings
+    = f.fields_for :packagings do |packaging|
+      = render 'packaging_fields', f: packaging, form: @form
+    .links
+      = link_to_add_association 'Add packaging', f, :packagings, render_options: { locals: { form: @form } }
 
 h3 Options
 

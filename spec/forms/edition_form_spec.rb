@@ -15,6 +15,8 @@ RSpec.describe EditionForm do
     let(:paramount) { create(:distributor, name: 'Paramount') }
     let(:dvd)       { create(:format, name: 'DVD') }
     let(:blu_ray)   { create(:format, name: 'Blu-ray') }
+    let(:digipak)   { create(:packaging, name: 'Digipak') }
+    let(:steelbook) { create(:packaging, name: 'Steelbook') }
 
     context 'for a new record' do
       let(:valid_params) do
@@ -34,6 +36,7 @@ RSpec.describe EditionForm do
         expect(edition_form.country_code).to eq('IT')
         expect(edition_form.release_date.to_s).to eq('2012-06-13')
         expect(edition_form.formats.size).to eq(0)
+        expect(edition_form.packagings.size).to eq(0)
       end
 
       context 'with valid params' do
@@ -59,6 +62,7 @@ RSpec.describe EditionForm do
           expect(edition_form.errors[:country_code]).to include "can't be blank"
           expect(edition_form.errors[:release_date]).to include "can't be blank"
           expect(edition_form.errors[:formats]).to_not include "can't be blank"
+          expect(edition_form.errors[:packagings]).to_not include "can't be blank"
         end
 
         it 'does not create a new edition' do
@@ -88,6 +92,12 @@ RSpec.describe EditionForm do
               'number_of_discs' => 1,
               '_destroy'        => false
             }
+          },
+          packagings_attributes: {
+            0 => {
+              'packaging_id' => digipak.id,
+              '_destroy'     => false
+            }
           }
         }
       end
@@ -99,10 +109,15 @@ RSpec.describe EditionForm do
         expect(edition_form.distributor_id).to eq(paramount.id)
         expect(edition_form.country_code).to eq('IT')
         expect(edition_form.release_date.to_s).to eq('2012-06-13')
+
         expect(edition_form.formats.size).to eq(1)
         expect(edition_form.formats.first.format_id).to eq(dvd.id)
         expect(edition_form.formats.first.edition_id).to eq(edition.id)
         expect(edition_form.formats.first.number_of_discs).to eq(1)
+
+        expect(edition_form.packagings.size).to eq(1)
+        expect(edition_form.packagings.first.packaging_id).to eq(digipak.id)
+        expect(edition_form.packagings.first.edition_id).to eq(edition.id)
       end
 
       context 'with valid params' do
@@ -113,11 +128,14 @@ RSpec.describe EditionForm do
             edition.name
           }.from('The Godfather: 40th Anniversary Edition').to('The Godfather: 40th Anniv. Edition').and change {
             edition.formats.count
+          }.from(0).to(1).and change {
+            edition.packagings.count
           }.from(0).to 1
         end
 
-        it 'is able to update attributes for an associated format' do
+        it 'is able to update attributes for an associated format and/or packaging' do
           edition_format = create(:edition_format, edition: edition, format: dvd, number_of_discs: 1)
+          edition_packaging = create(:edition_packaging, edition: edition, packaging: steelbook)
           valid_params = {
             formats_attributes: {
               0 => {
@@ -125,6 +143,13 @@ RSpec.describe EditionForm do
                 'format_id'       => dvd.id,
                 'number_of_discs' => 2,
                 '_destroy'        => false
+              }
+            },
+            packagings_attributes: {
+              0 => {
+                'id'           => edition_packaging.id,
+                'packaging_id' => digipak.id,
+                '_destroy'     => false
               }
             }
           }
@@ -135,11 +160,15 @@ RSpec.describe EditionForm do
             edition.reload
             edition_format.reload
             edition_format.number_of_discs
-          }.from(1).to(2)
+          }.from(1).to(2).and change {
+            edition_packaging.reload
+            edition_packaging.packaging_id
+          }.from(steelbook.id).to digipak.id
         end
 
-        it 'is able to remove an associated format as long as it is replaced with another one' do
+        it 'is able to remove an associated format and/or packaging as long as it is replaced with another one' do
           edition_format = create(:edition_format, edition: edition, format: dvd, number_of_discs: 1)
+          edition_packaging = create(:edition_packaging, edition: edition, packaging: digipak)
           valid_params = {
             formats_attributes: {
               0 => {
@@ -152,6 +181,17 @@ RSpec.describe EditionForm do
                 'format_id'       => blu_ray.id,
                 'number_of_discs' => 2,
                 '_destroy'        => false
+              }
+            },
+            packagings_attributes: {
+              0 => {
+                'id'           => edition_packaging.id,
+                'packaging_id' => digipak.id,
+                '_destroy'     => true
+              },
+              654321 => {
+                'packaging_id' => steelbook.id,
+                '_destroy'     => false
               }
             }
           }
@@ -180,6 +220,7 @@ RSpec.describe EditionForm do
           expect(edition_form.errors[:country_code]).to_not include "can't be blank"
           expect(edition_form.errors[:release_date]).to_not include "can't be blank"
           expect(edition_form.errors[:formats]).to include "can't be blank"
+          expect(edition_form.errors[:packagings]).to include "can't be blank"
         end
 
         it 'does not create a new format for edition' do
@@ -187,6 +228,14 @@ RSpec.describe EditionForm do
             edition_form.submit({})
           }.to_not change {
             EditionFormat.count
+          }
+        end
+
+        it 'does not create a new packaging for edition' do
+          expect {
+            edition_form.submit({})
+          }.to_not change {
+            EditionPackaging.count
           }
         end
 
@@ -218,6 +267,15 @@ RSpec.describe EditionForm do
       create(:format, name: 'Blu-ray')
 
       expect(edition_form.edition_formats.pluck(:name)).to eq(['Blu-ray', 'DVD'])
+    end
+  end
+
+  describe '#edition_packagings' do
+    it 'returns expected records ordered by name' do
+      create(:packaging, name: 'Steelbook')
+      create(:packaging, name: 'Digipak')
+
+      expect(edition_form.edition_packagings.pluck(:name)).to eq(['Digipak', 'Steelbook'])
     end
   end
 end

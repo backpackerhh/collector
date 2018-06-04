@@ -16,6 +16,12 @@ class EditionPresenter < BasePresenter
     edition.formats.map { |format| [format.number_of_discs, format.name].join(' ') }.join(', ')
   end
 
+  def packagings
+    return 'Not specified' if edition.packagings.empty?
+
+    edition.packagings.map(&:name).join(', ')
+  end
+
   def destroy
     link_to 'Delete', edition_path(edition), method: :delete, data: { confirm: 'Are you sure?' }
   end
