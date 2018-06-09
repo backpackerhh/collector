@@ -1,3 +1,5 @@
-tr
-  td= link_to format.name, edit_format_path(format)
-  td= link_to 'Delete', format_path(format), method: :delete, data: { confirm: 'Are you sure?' }
+- present(format) do |format_presenter|
+  tr
+    td= format_presenter.name
+    td= format_presenter.regions
+    td= format_presenter.destroy
