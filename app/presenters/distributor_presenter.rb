@@ -1,0 +1,2 @@
+class DistributorPresenter < BasePresenter
+end

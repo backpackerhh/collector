@@ -1,3 +1,4 @@
-tr
-  td= link_to packaging.name, edit_packaging_path(packaging)
-  td= link_to 'Delete', packaging_path(packaging), method: :delete, data: { confirm: 'Are you sure?' }
+- present(packaging) do |packaging_presenter|
+  tr
+    td= packaging_presenter.name
+    td= packaging_presenter.destroy

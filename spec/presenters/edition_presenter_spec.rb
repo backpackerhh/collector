@@ -5,13 +5,8 @@ RSpec.describe EditionPresenter, type: :presenter do
 
   let(:edition) { create(:edition, name: 'Back To The Future Trilogy', country_code: 'US') }
 
-  describe '#name' do
-    it 'returns link to edit edition' do
-      link = Nokogiri::HTML(presenter.name).css('a')[0]
-
-      expect(link.attributes['href'].value).to eq("/editions/#{edition.id}/edit")
-      expect(link.text).to eq('Back To The Future Trilogy')
-    end
+  include_examples 'common methods for presenters'do
+    let(:record) { edition }
   end
 
   describe '#country' do
@@ -35,17 +30,6 @@ RSpec.describe EditionPresenter, type: :presenter do
       edition.reload
 
       expect(presenter.formats).to eq('1 Blu-Ray, 2 DVD')
-    end
-  end
-
-  describe '#destroy' do
-    it 'returns link to destroy edition' do
-      link = Nokogiri::HTML(presenter.destroy).css('a')[0]
-
-      expect(link.attributes['href'].value).to eq("/editions/#{edition.id}")
-      expect(link.attributes['data-method'].value).to eq('delete')
-      expect(link.attributes['data-confirm'].value).to eq('Are you sure?')
-      expect(link.text).to eq('Delete')
     end
   end
 end

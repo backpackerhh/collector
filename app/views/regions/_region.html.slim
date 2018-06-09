@@ -1,4 +1,5 @@
-tr
-  td= link_to region.name, edit_region_path(region)
-  td= region.format_name
-  td= link_to 'Delete', region_path(region), method: :delete, data: { confirm: 'Are you sure?' }
+- present(region) do |region_presenter|
+  tr
+    td= region_presenter.name
+    td= region_presenter.format
+    td= region_presenter.destroy
